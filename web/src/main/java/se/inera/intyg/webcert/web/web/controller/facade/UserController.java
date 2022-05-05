@@ -80,6 +80,7 @@ public class UserController {
     @PrometheusTimeMethod
     public Response changeUnit(@PathParam("unitHsaId") @NotNull String unitHsaId) {
         LOG.debug("Changing care unit to {}", unitHsaId);
+        // TODO: Return updated user object with chosen logged in care unit set
         return Response.ok().build();
     }
 }
