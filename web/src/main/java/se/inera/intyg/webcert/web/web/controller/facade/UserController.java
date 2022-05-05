@@ -18,8 +18,11 @@
  */
 package se.inera.intyg.webcert.web.web.controller.facade;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,6 +33,7 @@ import se.inera.intyg.infra.monitoring.annotation.PrometheusTimeMethod;
 import se.inera.intyg.webcert.web.service.facade.GetUserResourceLinks;
 import se.inera.intyg.webcert.web.service.facade.UserService;
 import se.inera.intyg.webcert.web.service.user.WebCertUserService;
+import se.inera.intyg.webcert.web.web.controller.facade.dto.CareProviderForUserResponseDTO;
 import se.inera.intyg.webcert.web.web.controller.facade.dto.UserResponseDTO;
 
 @Path("/user")
@@ -60,5 +64,22 @@ public class UserController {
         final var loggedInUser = userService.getLoggedInUser();
         final var resourceLinks = getUserResourceLinks.get(webCertUserService.getUser());
         return Response.ok(UserResponseDTO.create(loggedInUser, resourceLinks)).build();
+    }
+
+    @GET
+    @Path("/careproviders")
+    @Produces(MediaType.APPLICATION_JSON + UTF_8_CHARSET)
+    @PrometheusTimeMethod
+    public Response getCareProvidersForUser() {
+        return Response.ok(CareProviderForUserResponseDTO.create()).build();
+    }
+
+    @POST
+    @Path("/unit/{unitHsaId}")
+    @Produces(MediaType.APPLICATION_JSON + UTF_8_CHARSET)
+    @PrometheusTimeMethod
+    public Response changeUnit(@PathParam("unitHsaId") @NotNull String unitHsaId) {
+        LOG.debug("Changing care unit to {}", unitHsaId);
+        return Response.ok().build();
     }
 }
