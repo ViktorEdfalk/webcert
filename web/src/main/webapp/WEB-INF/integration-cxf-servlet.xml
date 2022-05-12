@@ -36,6 +36,8 @@
   <context:property-placeholder location="classpath:application.properties"
     order="2" ignore-resource-not-found="false" />
 
+  <bean id="corsFilter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+
   <jaxrs:server address="/">
     <jaxrs:serviceBeans>
       <ref bean="intygIntegrationController" />
@@ -45,6 +47,7 @@
     <jaxrs:providers>
       <ref bean="jacksonJsonProvider" />
       <ref bean="webcertRedirectIntegrationExceptionHandler"/>
+      <ref bean="corsFilter" />
     </jaxrs:providers>
     <jaxrs:extensionMappings>
       <entry key="json" value="application/json" />

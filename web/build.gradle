@@ -262,6 +262,9 @@ dependencies {
     compile "org.apache.cxf:cxf-rt-frontend-jaxrs:${cxfVersion}"
     compile "org.apache.cxf:cxf-rt-transports-http:${cxfVersion}"
 
+    // https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-security-cors
+    compile "org.apache.cxf:cxf-rt-rs-security-cors:${cxfVersion}"
+
     compileOnly "org.apache.geronimo.specs:geronimo-jms_1.1_spec:${geronimoJmsVersion}"
 
     testCompile "se.inera.intyg.clinicalprocess.healthcond.certificate:intyg-clinicalprocess-healthcond-certificate-schemas:${intygClinicalprocessSchemasVersion}"

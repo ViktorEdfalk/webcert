@@ -26,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import se.inera.intyg.infra.monitoring.annotation.PrometheusTimeMethod;
 import se.inera.intyg.infra.security.common.model.AuthoritiesConstants;
 import se.inera.intyg.infra.security.common.model.UserOriginType;
@@ -43,6 +44,7 @@ public class UserIntegrationController extends BaseIntegrationController {
     };
 
     @GET
+    @CrossOriginResourceSharing
     @Path("/logout/now")
     @PrometheusTimeMethod
     public Response logoutUserNow(@Context HttpServletRequest request) {
