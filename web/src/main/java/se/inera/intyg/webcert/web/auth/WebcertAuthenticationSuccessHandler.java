@@ -101,6 +101,7 @@ public class WebcertAuthenticationSuccessHandler extends
                 fromSavedReq(savedRequest, IntygIntegrationController.PARAM_PATIENT_POSTADRESS),
                 fromSavedReq(savedRequest, IntygIntegrationController.PARAM_PATIENT_POSTNUMMER),
                 fromSavedReq(savedRequest, IntygIntegrationController.PARAM_PATIENT_POSTORT),
+                fromSavedReq(savedRequest, IntygIntegrationController.PARAM_FHIR_API),
                 fromSavedReqBoolean(savedRequest, IntygIntegrationController.PARAM_COHERENT_JOURNALING),
                 fromSavedReqBoolean(savedRequest, IntygIntegrationController.PARAM_PATIENT_DECEASED),
                 fromSavedReqBoolean(savedRequest, IntygIntegrationController.PARAM_INACTIVE_UNIT),

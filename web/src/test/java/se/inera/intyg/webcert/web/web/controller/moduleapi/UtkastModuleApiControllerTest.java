@@ -432,7 +432,7 @@ public class UtkastModuleApiControllerTest {
         String intygsTypVersion = INTYG_TYPE_VERSION;
         String newIntygId = "newIntygId";
 
-        IntegrationParameters integrationParameters = IntegrationParameters.of("", "", "", "", "", "", "", "", "", false, false, false,
+        IntegrationParameters integrationParameters = IntegrationParameters.of("", "", "", "", "", "", "", "", "", "", false, false, false,
             false);
 
         setupUser(intygsTyp, integrationParameters, UserOriginType.NORMAL.name(),
@@ -663,7 +663,7 @@ public class UtkastModuleApiControllerTest {
     }
 
     private void setupUser(String intygType, boolean coherentJournaling, String origin, List<String> privileges, List<String> features) {
-        IntegrationParameters integrationParameters = new IntegrationParameters("", "", "", "", "", "", "", "", "", coherentJournaling,
+        IntegrationParameters integrationParameters = new IntegrationParameters("", "", "", "", "", "", "", "", "", null, coherentJournaling,
             false, false, true);
         setupUser(intygType, integrationParameters, origin, privileges, features);
     }

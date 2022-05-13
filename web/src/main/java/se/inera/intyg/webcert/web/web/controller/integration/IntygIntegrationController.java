@@ -88,6 +88,8 @@ public class IntygIntegrationController extends BaseIntegrationController {
     public static final String PARAM_RESPONSIBLE_HOSP_NAME = "responsibleHospName";
     public static final String INTYG_TYP = "intygTyp";
 
+    public static final String PARAM_FHIR_API = "fhirApi";
+
     private static final Logger LOG = LoggerFactory.getLogger(IntygIntegrationController.class);
 
     private static final UserOriginType GRANTED_ORIGIN = UserOriginType.DJUPINTEGRATION;
@@ -146,7 +148,8 @@ public class IntygIntegrationController extends BaseIntegrationController {
         @DefaultValue("false") @QueryParam(PARAM_COHERENT_JOURNALING) boolean coherentJournaling,
         @DefaultValue("false") @QueryParam(PARAM_INACTIVE_UNIT) boolean inactiveUnit,
         @DefaultValue("false") @QueryParam(PARAM_PATIENT_DECEASED) boolean deceased,
-        @DefaultValue("true") @QueryParam(PARAM_FORNYA_OK) boolean fornyaOk) {
+        @DefaultValue("true") @QueryParam(PARAM_FORNYA_OK) boolean fornyaOk,
+        @QueryParam(PARAM_FHIR_API) String fhirApi) {
 
         String internIntygTyp = moduleRegistry.getModuleIdFromExternalId(intygTyp.toUpperCase());
         Map<String, Object> pathParameters = ImmutableMap.of(
@@ -157,7 +160,7 @@ public class IntygIntegrationController extends BaseIntegrationController {
 
         IntegrationParameters integrationParameters = IntegrationParameters.of(
             reference, responsibleHospName, alternatePatientSSn, fornamn, mellannamn, efternamn,
-            postadress, postnummer, postort, coherentJournaling, deceased, inactiveUnit, fornyaOk);
+            postadress, postnummer, postort, fhirApi, coherentJournaling, deceased, inactiveUnit, fornyaOk);
 
         // Temp. logging in an attempt to track down hashCode failures (hashCode has to be changed for redis updates)
         WebCertUser user = getWebCertUser();
@@ -192,7 +195,8 @@ public class IntygIntegrationController extends BaseIntegrationController {
         @QueryParam(PARAM_REFERENCE) String reference,
         @DefaultValue("false") @QueryParam(PARAM_INACTIVE_UNIT) boolean inactiveUnit,
         @DefaultValue("false") @QueryParam(PARAM_PATIENT_DECEASED) boolean deceased,
-        @DefaultValue("true") @QueryParam(PARAM_FORNYA_OK) boolean fornyaOk) {
+        @DefaultValue("true") @QueryParam(PARAM_FORNYA_OK) boolean fornyaOk,
+        @QueryParam(PARAM_FHIR_API) String fhirApi) {
 
         Map<String, Object> params = ImmutableMap.of(PARAM_CERT_ID, intygId);
 
@@ -201,7 +205,7 @@ public class IntygIntegrationController extends BaseIntegrationController {
 
         IntegrationParameters integrationParameters = IntegrationParameters.of(
             reference, responsibleHospName, alternatePatientSSn, fornamn, mellannamn, efternamn,
-            postadress, postnummer, postort, coherentJournaling, deceased, inactiveUnit, fornyaOk);
+            postadress, postnummer, postort, fhirApi, coherentJournaling, deceased, inactiveUnit, fornyaOk);
 
         WebCertUser user = getWebCertUser();
         user.setParameters(integrationParameters);
@@ -266,7 +270,8 @@ public class IntygIntegrationController extends BaseIntegrationController {
         @FormParam(PARAM_REFERENCE) String reference,
         @DefaultValue("false") @FormParam(PARAM_INACTIVE_UNIT) boolean inactiveUnit,
         @DefaultValue("false") @FormParam(PARAM_PATIENT_DECEASED) boolean deceased,
-        @DefaultValue("true") @FormParam(PARAM_FORNYA_OK) boolean fornyaOk) {
+        @DefaultValue("true") @FormParam(PARAM_FORNYA_OK) boolean fornyaOk,
+        @QueryParam(PARAM_FHIR_API) String fhirApi) {
 
         final Map<String, Object> params = ImmutableMap.of(PARAM_CERT_ID, intygId);
 
@@ -274,7 +279,7 @@ public class IntygIntegrationController extends BaseIntegrationController {
 
         IntegrationParameters integrationParameters = IntegrationParameters.of(
             reference, responsibleHospName, alternatePatientSSn, fornamn, mellannamn, efternamn,
-            postadress, postnummer, postort, coherentJournaling, deceased, inactiveUnit, fornyaOk);
+            postadress, postnummer, postort, fhirApi, coherentJournaling, deceased, inactiveUnit, fornyaOk);
 
         WebCertUser user = getWebCertUser();
         user.setParameters(integrationParameters);
