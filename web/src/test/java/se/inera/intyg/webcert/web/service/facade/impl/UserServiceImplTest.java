@@ -426,6 +426,6 @@ class UserServiceImplTest {
     private IntegrationParameters getParameters(Boolean inactiveUnit) {
         return new IntegrationParameters(null, null, null, null,
             null, null, null, null, null,
-            false, false, inactiveUnit, false);
+            null, false, false, inactiveUnit, false);
     }
 }

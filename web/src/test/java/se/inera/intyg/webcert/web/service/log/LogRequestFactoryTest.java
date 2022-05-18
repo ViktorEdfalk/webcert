@@ -286,10 +286,9 @@ public class LogRequestFactoryTest {
         expectedCareProvider.setId("careProviderId");
         expectedCareProvider.setNamn("careProviderName");
         doReturn(expectedCareProvider).when(user).getValdVardgivare();
-
         if (coherentJournaling) {
             final var parameters = IntegrationParameters
-                .of(null, null, null, null, null, null, null, null, null, coherentJournaling, false, false, false);
+                .of(null, null, null, null, null, null, null, null, null, null, coherentJournaling, false, false, false);
             doReturn(parameters).when(user).getParameters();
         }
         return user;

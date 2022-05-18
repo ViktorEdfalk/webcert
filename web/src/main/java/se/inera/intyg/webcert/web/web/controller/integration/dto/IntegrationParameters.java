@@ -35,6 +35,7 @@ public final class IntegrationParameters implements Serializable {
     private final String postadress;
     private final String postnummer;
     private final String postort;
+    private final String fhirApi;
 
     private final boolean sjf; //Sammanhållen JournalFöring
     private final boolean patientDeceased;
@@ -50,7 +51,7 @@ public final class IntegrationParameters implements Serializable {
     // CHECKSTYLE:OFF ParameterNumber
     public IntegrationParameters(String reference, String responsibleHospName, String alternateSsn, String fornamn,
         String mellannamn, String efternamn, String postadress, String postnummer, String postort,
-        boolean sjf, boolean patientDeceased, boolean inactiveUnit, boolean fornyaOk) {
+        String fhirApi, boolean sjf, boolean patientDeceased, boolean inactiveUnit, boolean fornyaOk) {
 
         this.reference = reference;
         this.responsibleHospName = responsibleHospName;
@@ -61,6 +62,7 @@ public final class IntegrationParameters implements Serializable {
         this.postadress = postadress;
         this.postnummer = postnummer;
         this.postort = postort;
+        this.fhirApi = fhirApi;
         this.sjf = sjf;
         this.patientDeceased = patientDeceased;
         this.inactiveUnit = inactiveUnit;
@@ -77,6 +79,7 @@ public final class IntegrationParameters implements Serializable {
         final String postadress,
         final String postnummer,
         final String postort,
+        final String fhirApi,
         final boolean sjf,
         final boolean patientDeceased,
         final boolean inactiveUnit,
@@ -92,6 +95,7 @@ public final class IntegrationParameters implements Serializable {
             postadress,
             postnummer,
             postort,
+            fhirApi,
             sjf,
             patientDeceased,
             inactiveUnit,
@@ -101,6 +105,10 @@ public final class IntegrationParameters implements Serializable {
     // CHECKSTYLE:ON ParameterNumber
 
     // final class members
+
+    public String getFhirApi() {
+        return fhirApi;
+    }
 
     public String getReference() {
         return reference;

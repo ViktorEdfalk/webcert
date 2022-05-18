@@ -265,6 +265,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-security-cors
     compile "org.apache.cxf:cxf-rt-rs-security-cors:${cxfVersion}"
 
+    // https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-r4
+    compile "ca.uhn.hapi.fhir:hapi-fhir-structures-r4:5.7.2"
+
+    // https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-client
+    compile "ca.uhn.hapi.fhir:hapi-fhir-client:5.7.2"
+
+
+
     compileOnly "org.apache.geronimo.specs:geronimo-jms_1.1_spec:${geronimoJmsVersion}"
 
     testCompile "se.inera.intyg.clinicalprocess.healthcond.certificate:intyg-clinicalprocess-healthcond-certificate-schemas:${intygClinicalprocessSchemasVersion}"

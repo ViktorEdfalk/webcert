@@ -93,6 +93,7 @@ public class JwtAuthenticationSuccessHandler extends
                 getStringParam(request, IntygIntegrationController.PARAM_PATIENT_POSTADRESS),
                 getStringParam(request, IntygIntegrationController.PARAM_PATIENT_POSTNUMMER),
                 getStringParam(request, IntygIntegrationController.PARAM_PATIENT_POSTORT),
+                getStringParam(request, IntygIntegrationController.PARAM_FHIR_API),
                 getBooleanParameter(request, IntygIntegrationController.PARAM_COHERENT_JOURNALING, false),
                 getBooleanParameter(request, IntygIntegrationController.PARAM_PATIENT_DECEASED, false),
                 getBooleanParameter(request, IntygIntegrationController.PARAM_INACTIVE_UNIT, false),

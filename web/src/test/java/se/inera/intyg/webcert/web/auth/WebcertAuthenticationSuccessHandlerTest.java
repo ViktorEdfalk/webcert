@@ -134,7 +134,7 @@ public class WebcertAuthenticationSuccessHandlerTest {
         when(savedRequest.getMethod()).thenReturn("POST");
         when(savedRequest.getRequestURI()).thenReturn(URL);
         when(requestCache.getRequest(req, resp)).thenReturn(savedRequest);
-        when(user.getParameters()).thenReturn(IntegrationParameters.of("", "", "", "", "", "", "", "", "", false, false, false, false));
+        when(user.getParameters()).thenReturn(IntegrationParameters.of("", "", "", "", "", "", "", "", "", "", false, false, false, false));
 
         testee.onAuthenticationSuccess(req, resp, auth);
         verifyNoInteractions(redirectStrategy);
