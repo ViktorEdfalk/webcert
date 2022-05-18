@@ -51,6 +51,7 @@ import se.inera.intyg.common.support.model.common.internal.Patient;
 import se.inera.intyg.common.support.model.common.internal.Utlatande;
 import se.inera.intyg.common.support.modules.registry.IntygModuleRegistry;
 import se.inera.intyg.common.support.modules.registry.ModuleNotFoundException;
+import se.inera.intyg.common.support.modules.support.api.FHIRModuleApi;
 import se.inera.intyg.common.support.modules.support.api.ModuleApi;
 import se.inera.intyg.common.support.modules.support.api.exception.ModuleException;
 import se.inera.intyg.infra.monitoring.annotation.PrometheusTimeMethod;
@@ -60,6 +61,7 @@ import se.inera.intyg.webcert.common.service.exception.WebCertServiceException;
 import se.inera.intyg.webcert.persistence.utkast.model.Utkast;
 import se.inera.intyg.webcert.web.service.access.DraftAccessServiceHelper;
 import se.inera.intyg.webcert.web.service.access.LockedDraftAccessServiceHelper;
+import se.inera.intyg.webcert.web.service.fhir.FHIRConditionServices;
 import se.inera.intyg.webcert.web.service.monitoring.MonitoringLogService;
 import se.inera.intyg.webcert.web.service.patient.PatientDetailsResolver;
 import se.inera.intyg.webcert.web.service.relation.CertificateRelationService;
@@ -130,6 +132,9 @@ public class UtkastModuleApiController extends AbstractApiController {
     @Autowired
     private LockedDraftAccessServiceHelper lockedDraftAccessServiceHelper;
 
+    @Autowired
+    private FHIRConditionServices fhirConditionServices;
+
 
     /**
      * Returns the draft certificate as JSON identified by the intygId.
@@ -137,6 +142,7 @@ public class UtkastModuleApiController extends AbstractApiController {
      * @param intygsId The id of the certificate
      * @return a JSON object
      */
+    @SuppressWarnings("checkstyle:RegexpSingleline")
     @GET
     @Path("/{intygsTyp}/{intygsId}")
     @Produces(MediaType.APPLICATION_JSON + UTF_8_CHARSET)
@@ -172,6 +178,16 @@ public class UtkastModuleApiController extends AbstractApiController {
             // the draft may be updated with new patient info on the next auto-save!
             String updatedModel = moduleApi.updateBeforeSave(utkast.getModel(), resolvedPatientData);
             //utkast.setModel(updatedModel);
+
+            if (moduleApi instanceof FHIRModuleApi) {
+                final var fhirModuleApi = (FHIRModuleApi) moduleApi;
+
+                if (utkast.getVersion() == 0 && utkast.getRelationKod() == null) {
+                    var diagnosisList = fhirConditionServices.getDiagnosisForPatient(savedPatientData.getPersonId().getPersonnummer());
+                    updatedModel = fhirModuleApi.prefillWithFhirData(updatedModel, diagnosisList);
+                }
+            }
+
             newDraft.setContent(updatedModel);
 
             // If utkast actually is a newly created draft (without relations, e.g FORNYA,ERSATT), we shall provide
